@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_food_app/utils/dimensions.dart';
 
 class LargeText extends StatelessWidget {
   final Color? color;
@@ -8,7 +9,7 @@ class LargeText extends StatelessWidget {
   LargeText({super.key,
   this.color = Colors.black,
   required this.text,
-  this.size = 20,
+  this.size = 0,
   this.overFlow = TextOverflow.ellipsis
   });
 
@@ -20,7 +21,7 @@ class LargeText extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontWeight: FontWeight.w400,
-        fontSize: size
+        fontSize: size==0?Dimensions.font20:size,
       ),
     );
   }

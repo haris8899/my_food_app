@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:my_food_app/utils/dimensions.dart';
 import 'package:my_food_app/widgets/Text_Icon.dart';
 import 'package:my_food_app/widgets/large_text.dart';
 import 'package:my_food_app/widgets/small_text.dart';
@@ -15,7 +16,7 @@ class _HomePageBodyState extends State<HomePageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currentPageValue = 0.0;
   double _scaleFactor = 0.8;
-  double _height = 220;
+  double _height = Dimensions.pageViewContainer;
   @override
   void initState() {
     super.initState();
@@ -37,7 +38,7 @@ class _HomePageBodyState extends State<HomePageBody> {
     return Column(
       children: [
         Container(
-          height: 320,
+          height: Dimensions.pageViewMainContainer,
           child: PageView.builder(
               controller: pageController,
               itemCount: 5,
@@ -90,10 +91,10 @@ class _HomePageBodyState extends State<HomePageBody> {
         children: [
           Container(
               //child:Text(index.toString()),
-              height: 220,
+              height: Dimensions.pageViewContainer,
               margin: EdgeInsets.only(left: 7, right: 7),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(Dimensions.BorderRadius30),
                 color: index.isEven ? Colors.blue : Colors.amber,
                 image: DecorationImage(
                     fit: BoxFit.cover,
@@ -102,10 +103,10 @@ class _HomePageBodyState extends State<HomePageBody> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: 140,
+              height: Dimensions.pageViewTextContainer,
               margin: EdgeInsets.only(left: 15, right: 15, bottom: 20),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(Dimensions.BorderRadius30),
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
@@ -117,13 +118,17 @@ class _HomePageBodyState extends State<HomePageBody> {
                 ],
               ),
               child: Container(
-                padding: EdgeInsets.all(15),
+                padding: EdgeInsets.only(
+                  top: Dimensions.height15,
+                  left: 15,
+                  right: 15
+                ),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       LargeText(text: "Food Name"),
                       SizedBox(
-                        height: 10,
+                        height: Dimensions.height10,
                       ),
                       Row(
                         children: [
@@ -152,28 +157,23 @@ class _HomePageBodyState extends State<HomePageBody> {
                         ],
                       ),
                       SizedBox(
-                        height: 20,
+                        height: Dimensions.height20,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextIcon(
                             icon: Icons.circle_sharp,
                             text: 'Normal',
                             iconColor: Colors.amber,
                           ),
-                          SizedBox(
-                            width: 5,
-                          ),
                           TextIcon(
                               icon: Icons.location_on,
                               text: "1.7 Km",
                               iconColor: Colors.red),
-                          SizedBox(
-                            width: 5,
-                          ),
                           TextIcon(
                               icon: Icons.access_time_outlined,
-                              text: "20 minutes",
+                              text: "20 min",
                               iconColor: Colors.red),
                         ],
                       ),
