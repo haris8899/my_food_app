@@ -1,6 +1,6 @@
 # my_food_app
 
-A new Flutter project.
+This is my food app
 
 ## Getting Started
 
