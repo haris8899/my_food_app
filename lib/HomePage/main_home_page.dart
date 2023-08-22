@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_food_app/HomePage/home_page_body.dart';
+import 'package:my_food_app/utils/dimensions.dart';
 import 'package:my_food_app/widgets/large_text.dart';
 import 'package:my_food_app/widgets/small_text.dart';
 
@@ -18,13 +19,13 @@ class _MainHomePageState extends State<MainHomePage> {
       children: [
         Container(
           child: Container(
-            margin: EdgeInsets.only(top: 55,bottom: 15),
-            padding: EdgeInsets.only(left: 20,right: 20),
+            margin: EdgeInsets.only(top: Dimensions.TopGap,bottom: Dimensions.BorderRadius15),
+            padding: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(children: [
-                    LargeText( text: "Country",color: Colors.blue,size: 25,),
+                    LargeText( text: "Country",color: Colors.blue,size: Dimensions.icon24,),
                     Row(
                       children: [
                         SmallText(text: "City",color: Colors.black,),
@@ -34,11 +35,11 @@ class _MainHomePageState extends State<MainHomePage> {
                   ]),
                   Center(
                     child: Container(
-                      width: 45,
-                      height: 45,
-                      child: Icon(Icons.search, color: Colors.white,),
+                      width: Dimensions.height45,
+                      height: Dimensions.height45,
+                      child: Icon(Icons.search, color: Colors.white, size: Dimensions.icon24),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(Dimensions.BorderRadius15),
                         color: Colors.blue,
                       ),
                     ),

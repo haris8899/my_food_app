@@ -45,7 +45,7 @@ class _HomePageBodyState extends State<HomePageBody> {
               itemBuilder: (context, position) {
                 return _buildPageItem(position);
               }),
-        ),
+),
         DotsIndicator(
           dotsCount: 5,
           position: _currentPageValue,
@@ -53,11 +53,34 @@ class _HomePageBodyState extends State<HomePageBody> {
             activeColor: Colors.blue,
             size: const Size.square(9.0),
             activeSize: const Size(18.0, 9.0),
-            activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-            ),
+            activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)),
+          ),
         ),
-      ],
-    );
+        SizedBox(height: Dimensions.height30,),
+        Container(
+          margin: EdgeInsets.only(left: Dimensions.width30),
+          child: Row(
+            children: [
+              LargeText(text: "Popular"),
+            ]
+          ),
+        ),
+        ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index)=>
+          Container(
+            margin: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20),
+            child: Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(borderRadius:BorderRadius.circular(Dimensions.BorderRadius30)),
+                )
+              ]
+            ),
+          )
+          )
+      ],);
   }
 
   Widget _buildPageItem(int index) {
@@ -83,7 +106,7 @@ class _HomePageBodyState extends State<HomePageBody> {
     } else {
       var currScale = 0.8;
       matrix = Matrix4.diagonal3Values(1, currScale, 1)
-        ..setTranslationRaw(0, _height *(1-_scaleFactor)/2, 0);
+        ..setTranslationRaw(0, _height * (1 - _scaleFactor) / 2, 0);
     }
     return Transform(
       transform: matrix,
@@ -92,7 +115,7 @@ class _HomePageBodyState extends State<HomePageBody> {
           Container(
               //child:Text(index.toString()),
               height: Dimensions.pageViewContainer,
-              margin: EdgeInsets.only(left: 7, right: 7),
+              margin: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.BorderRadius30),
                 color: index.isEven ? Colors.blue : Colors.amber,
@@ -104,7 +127,7 @@ class _HomePageBodyState extends State<HomePageBody> {
             alignment: Alignment.bottomCenter,
             child: Container(
               height: Dimensions.pageViewTextContainer,
-              margin: EdgeInsets.only(left: 15, right: 15, bottom: 20),
+              margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20, bottom: Dimensions.height20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.BorderRadius30),
                 color: Colors.white,
@@ -119,10 +142,7 @@ class _HomePageBodyState extends State<HomePageBody> {
               ),
               child: Container(
                 padding: EdgeInsets.only(
-                  top: Dimensions.height15,
-                  left: 15,
-                  right: 15
-                ),
+                    top: Dimensions.height15, left: 15, right: 15),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
