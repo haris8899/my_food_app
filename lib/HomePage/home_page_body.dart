@@ -66,20 +66,69 @@ class _HomePageBodyState extends State<HomePageBody> {
             ]
           ),
         ),
-        ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index)=>
-          Container(
-            margin: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20),
-            child: Row(
-              children: [
-                Container(
-                  decoration: BoxDecoration(borderRadius:BorderRadius.circular(Dimensions.BorderRadius30)),
-                )
-              ]
+        Container(
+          height: Dimensions.pageViewVerticalContainer,
+          child: ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: 10,
+            itemBuilder: (context, index)=>
+            Container(
+              margin: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20,bottom: Dimensions.height10),
+              child: Row(
+                children: [
+                  Container(
+                    width: Dimensions.height120,
+                    height: Dimensions.height120,
+                    decoration: BoxDecoration(
+                      borderRadius:BorderRadius.circular(Dimensions.BorderRadius15),
+                      color: Colors.lightBlue,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(
+                          "assets/images/food1.png",
+                        )
+                      )
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      //margin: EdgeInsets.only(left: Dimensions.width10,right: Dimensions.width10),
+                      height: Dimensions.height100,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3),
+                            spreadRadius: 8,
+                            blurRadius: 10,
+                            offset: Offset(0, 3),
+                            ),
+                        ],
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(Dimensions.BorderRadius15),
+                          bottomRight: Radius.circular(Dimensions.BorderRadius15),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          top: Dimensions.height10,
+                          left: Dimensions.width10
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            LargeText(text: "Food"),
+                            SmallText(text: "Very good dish"),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ]
+              ),
+            )
             ),
-          )
-          )
+        )
       ],);
   }
 

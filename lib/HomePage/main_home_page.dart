@@ -47,7 +47,11 @@ class _MainHomePageState extends State<MainHomePage> {
                 ]),
           ),
         ),
-        HomePageBody(),
+        Expanded(
+          child: SingleChildScrollView(
+            child: HomePageBody()
+          )
+        ),
       ],
     ),
   );
