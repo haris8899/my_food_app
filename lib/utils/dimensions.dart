@@ -12,10 +12,12 @@ class Dimensions {
   static double height10 = screenHeight / 84.4;
   static double height15 = screenHeight / 56.27;
   static double height20 = screenHeight / 42.2;
+  static double height25 = screenHeight / 33.76;
   static double height30 = screenHeight / 28.13;
   static double height45 = screenHeight / 18.75;
   static double height100 = screenHeight / 8.44;
   static double height120 = screenHeight / 7.03;
+  static double height300 = screenHeight / 2.412;
 
   static double width10 = screenWidth / 41.1;
   static double width15 = screenWidth / 27.4;
@@ -31,4 +33,5 @@ class Dimensions {
 
   static double TopGap = screenHeight / 16.88;
   static double icon24 = screenHeight / 36.17;
+  static double icon16 = screenHeight / 52.75;
 }
