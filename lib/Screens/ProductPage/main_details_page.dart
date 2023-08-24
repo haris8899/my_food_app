@@ -3,6 +3,8 @@ import 'package:my_food_app/utils/dimensions.dart';
 import 'package:my_food_app/widgets/Text_Icon.dart';
 import 'package:my_food_app/widgets/action_icon_button.dart';
 import 'package:my_food_app/widgets/details_column.dart';
+import 'package:my_food_app/widgets/expandable_text.dart';
+import 'package:my_food_app/widgets/item_counter.dart';
 import 'package:my_food_app/widgets/large_text.dart';
 import 'package:my_food_app/widgets/small_text.dart';
 
@@ -51,9 +53,62 @@ class MainDetailsPage extends StatelessWidget {
             right: 0,
             bottom: 0,
             top: Dimensions.height300 - Dimensions.height20,
-            child: DetailsColumn(text: "Food"),
+            child: Container(
+              padding: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20,top: Dimensions.height20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(Dimensions.height20),
+                  topRight: Radius.circular(Dimensions.height20)
+                ),
+                color: Colors.white, 
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  DetailsColumn(text: "Food"),
+                  SizedBox(height: Dimensions.height20,),
+                  LargeText(text: "Introduction"),
+                  ExpandableText(text: "A shawarma is a popular Middle Eastern and Mediterranean dish that consists of thin slices of marinated meat, typically lamb, chicken, beef, or a combination thereof. The meat is stacked in a vertical rotisserie and slowly roasted as it turns on the heat source. This cooking method allows the outer layer of the meat to become crispy and caramelized, while the inner layers remain tender and juicy.")
+                ],
+              ),
+            ),
           ),
         ],
+      ),
+      bottomNavigationBar: Container(
+        height: Dimensions.pageViewTextContainer,
+        padding: EdgeInsets.only(
+          left: Dimensions.width20,
+          right: Dimensions.width20,
+          top: Dimensions.height30, 
+          bottom: Dimensions.height30
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(Dimensions.height20*2),
+            topRight: Radius.circular(Dimensions.height20*2)
+          ),
+          color: Colors.grey[100],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ItermCounterWidget(),
+            Container(
+              padding: EdgeInsets.only(
+                  left: Dimensions.width20,
+                  right: Dimensions.width20,
+                  top: Dimensions.height20,
+                  bottom: Dimensions.height20
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.height20),
+                color: Colors.blue,
+              ),
+              child: LargeText(text: "10\$ | Add to cart",color: Colors.white,),
+            )
+          ],
+        ),
       ),
     );
   }

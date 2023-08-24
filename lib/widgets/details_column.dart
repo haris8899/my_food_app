@@ -10,16 +10,7 @@ class DetailsColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-              padding: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20,top: Dimensions.height20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(Dimensions.height20),
-                  topRight: Radius.circular(Dimensions.height20)
-                ),
-                color: Colors.white, 
-              ),
-              child: Column(
+    return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       LargeText(text: text,size: Dimensions.height25,),
@@ -73,7 +64,6 @@ class DetailsColumn extends StatelessWidget {
                               iconColor: Colors.red),
                         ],
                       ),
-                    ]),
-            );
+                    ]);
   }
 }
