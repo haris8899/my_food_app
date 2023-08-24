@@ -33,9 +33,7 @@ class _EpandableTextState extends State<ExpandableText> {
   }
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SingleChildScrollView(
-        child: Container(
+    return Container(
           child: SecondHalf.isEmpty?SmallText(text: FirstHalf,size: Dimensions.font16,color: Colors.black,height: 1.8,):Column(
             children: [
               SmallText(text: hiddentext?(FirstHalf+"..."):FirstHalf+SecondHalf,size: Dimensions.font16,color: Colors.black,height: 1.8,),
@@ -54,8 +52,6 @@ class _EpandableTextState extends State<ExpandableText> {
               )
             ],
           ),
-        ),
-      ),
-    );
+        );
   }
 }

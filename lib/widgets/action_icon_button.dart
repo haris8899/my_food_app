@@ -6,13 +6,15 @@ class ActionIconButton extends StatelessWidget {
   final Color backgroundColor;
   final Color IconColor;
   final double size;
+  final double iconSize;
   ActionIconButton(
     {
       super.key, 
       required this.icon, 
       this.backgroundColor = Colors.white, 
       this.IconColor = Colors.black38, 
-      this.size = 40,
+      this.size = 40, 
+      this.iconSize = 16,
     }
   );
 
@@ -28,7 +30,7 @@ class ActionIconButton extends StatelessWidget {
       child: Icon(
         icon,
         color: IconColor,
-        size: Dimensions.icon16,
+        size: iconSize==16?Dimensions.icon16:iconSize,
       ),
     );
   }

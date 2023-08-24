@@ -68,7 +68,7 @@ class MainDetailsPage extends StatelessWidget {
                   DetailsColumn(text: "Food"),
                   SizedBox(height: Dimensions.height20,),
                   LargeText(text: "Introduction"),
-                  ExpandableText(text: "A shawarma is a popular Middle Eastern and Mediterranean dish that consists of thin slices of marinated meat, typically lamb, chicken, beef, or a combination thereof. The meat is stacked in a vertical rotisserie and slowly roasted as it turns on the heat source. This cooking method allows the outer layer of the meat to become crispy and caramelized, while the inner layers remain tender and juicy.")
+                  Expanded(child: SingleChildScrollView(child: ExpandableText(text: "A shawarma is a popular Middle Eastern and Mediterranean dish that consists of thin slices of marinated meat, typically lamb, chicken, beef, or a combination thereof. The meat is stacked in a vertical rotisserie and slowly roasted as it turns on the heat source. This cooking method allows the outer layer of the meat to become crispy and caramelized, while the inner layers remain tender and juicy.")))
                 ],
               ),
             ),
