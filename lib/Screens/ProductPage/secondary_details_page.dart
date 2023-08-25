@@ -17,11 +17,15 @@ class SecondaryDetailsPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: Dimensions.height80,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ActionIconButton(icon: Icons.close),
+                InkWell(
+                  onTap: ()=>Navigator.pop(context),
+                  child: ActionIconButton(icon: Icons.close)
+                ),
                 ActionIconButton(icon: Icons.shopping_cart),
               ],
             ),

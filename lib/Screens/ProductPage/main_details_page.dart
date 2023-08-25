@@ -39,8 +39,11 @@ class MainDetailsPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ActionIconButton(
-                  icon: Icons.arrow_back_ios
+                InkWell(
+                  onTap:()=> Navigator.pop(context),
+                  child: ActionIconButton(
+                    icon: Icons.arrow_back_ios
+                  ),
                 ),
                 ActionIconButton(
                   icon: Icons.shopping_cart_outlined,

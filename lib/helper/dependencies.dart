@@ -4,7 +4,7 @@ import 'package:my_food_app/data/api/api_client.dart';
 import 'package:my_food_app/data/repository/main_product_repo.dart';
 
 Future<void> init() async {
-  Get.lazyPut(() => ApiClient(AppBaseUrl: "url"));
+  Get.lazyPut(() => ApiClient(AppBaseUrl: "https://mvs.bslmeiyu.com"));
   Get.lazyPut(() => MainProductRepo(apiClient: Get.find()));
   Get.lazyPut(() => MainProductController(mainProductRepo: Get.find()));
 }
