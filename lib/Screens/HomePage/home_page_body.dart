@@ -136,25 +136,25 @@ class _HomePageBodyState extends State<HomePageBody> {
                                 SizedBox(
                                   height: Dimensions.width10,
                                 ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    TextIcon(
-                                      icon: Icons.circle_sharp,
-                                      text: 'Normal',
-                                      iconColor: Colors.amber,
-                                    ),
-                                    TextIcon(
-                                        icon: Icons.location_on,
-                                        text: "1.7 Km",
-                                        iconColor: Colors.red),
-                                    TextIcon(
-                                        icon: Icons.access_time_outlined,
-                                        text: "20 min",
-                                        iconColor: Colors.red),
-                                  ],
-                                ),
+                                // Row(
+                                //   mainAxisAlignment:
+                                //       MainAxisAlignment.spaceBetween,
+                                //   children: [
+                                //     TextIcon(
+                                //       icon: Icons.circle_sharp,
+                                //       text: 'Normal',
+                                //       iconColor: Colors.amber,
+                                //     ),
+                                //     TextIcon(
+                                //         icon: Icons.location_on,
+                                //         text: "1.7 Km",
+                                //         iconColor: Colors.red),
+                                //     TextIcon(
+                                //         icon: Icons.access_time_outlined,
+                                //         text: "20 min",
+                                //         iconColor: Colors.red),
+                                //   ],
+                                // ),
                               ],
                             ),
                           ),
