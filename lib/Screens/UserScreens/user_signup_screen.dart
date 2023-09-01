@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:my_food_app/Screens/UserScreens/user_signup_screen.dart';
 import 'package:my_food_app/utils/dimensions.dart';
+import 'package:my_food_app/widgets/email_field.dart';
 import 'package:my_food_app/widgets/password_field.dart';
 
-import '../../widgets/email_field.dart';
+import '../../widgets/action_icon_button.dart';
 
-class UserSignInWidget extends StatelessWidget {
-  const UserSignInWidget({super.key});
+class UserSignUpWidget extends StatelessWidget {
+  const UserSignUpWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +20,22 @@ class UserSignInWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: Dimensions.height80,),
+            Padding(
+              padding: EdgeInsets.only(top: Dimensions.height30,left: Dimensions.width15, right: Dimensions.width15),
+              child:InkWell(
+                    onTap:()=> Navigator.pop(context),
+                    child: ActionIconButton(
+                      icon: Icons.arrow_back_ios
+                    ),
+                  ),
+            ),
+            SizedBox(height: Dimensions.height30,),
             Padding(
               padding: EdgeInsets.all(Dimensions.height20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text("Login", style: TextStyle(color: Colors.white, fontSize: Dimensions.height45),),
+                  Text("Sign Up", style: TextStyle(color: Colors.white, fontSize: Dimensions.height45),),
                   SizedBox(height: Dimensions.height10,),
                 ],
               ),
@@ -58,11 +67,10 @@ class UserSignInWidget extends StatelessWidget {
                             children: <Widget>[
                               EmailField(text: "Email"),
                               PasswordField(text: "Password"),
+                              PasswordField(text: "Confirm Password"),
                             ],
                           ),
                         ),
-                        SizedBox(height: Dimensions.height30,),
-                        Text("Forgot Password?", style: TextStyle(color: Colors.grey),),
                         SizedBox(height: Dimensions.height30,),
                         Container(
                           height: 50,
@@ -72,7 +80,7 @@ class UserSignInWidget extends StatelessWidget {
                             color: Colors.orange[900]
                           ),
                           child: Center(
-                            child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                            child: Text("Sign Up", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                           ),
                         ),
                         SizedBox(height: Dimensions.height45,),
@@ -105,21 +113,6 @@ class UserSignInWidget extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(height: Dimensions.height20,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Not a Member? ", style: TextStyle(color: Colors.grey),),
-                            InkWell(
-                              child: Text("Register Now",style: TextStyle(color: Colors.blue),),
-                              onTap: () => {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const UserSignUpWidget()),),
-                                  },
-                              ),
                           ],
                         ),
                       ],

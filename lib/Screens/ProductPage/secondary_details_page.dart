@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_food_app/data/data.dart';
 import 'package:my_food_app/utils/dimensions.dart';
 import 'package:my_food_app/widgets/action_icon_button.dart';
 import 'package:my_food_app/widgets/expandable_text.dart';
@@ -8,7 +9,8 @@ import 'package:my_food_app/widgets/large_text.dart';
 import 'package:my_food_app/widgets/small_text.dart';
 
 class SecondaryDetailsPage extends StatelessWidget {
-  const SecondaryDetailsPage({super.key});
+  final int index;
+  const SecondaryDetailsPage({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,8 @@ class SecondaryDetailsPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
-                  onTap: ()=>Navigator.pop(context),
-                  child: ActionIconButton(icon: Icons.close)
-                ),
+                    onTap: () => Navigator.pop(context),
+                    child: ActionIconButton(icon: Icons.close)),
                 ActionIconButton(icon: Icons.shopping_cart),
               ],
             ),
@@ -47,7 +48,7 @@ class SecondaryDetailsPage extends StatelessWidget {
                         topRight: Radius.circular(Dimensions.BorderRadius15),
                       )),
                   child: LargeText(
-                    text: "Food",
+                    text: dataClass.mainlist[index]["name"]!,
                     size: Dimensions.height25,
                   )),
             ),
@@ -56,7 +57,7 @@ class SecondaryDetailsPage extends StatelessWidget {
             expandedHeight: Dimensions.height300,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
-                "assets/images/food1.png",
+                dataClass.mainlist[index]["image"]!,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -70,8 +71,7 @@ class SecondaryDetailsPage extends StatelessWidget {
                       left: Dimensions.width20, right: Dimensions.width20),
                   decoration: BoxDecoration(),
                   child: ExpandableText(
-                      text:
-                          "A shawarma is a popular Middle Eastern and Mediterranean dish that consists of thin slices of marinated meat, typically lamb, chicken, beef, or a combination thereof. The meat is stacked in a vertical rotisserie and slowly roasted as it turns on the heat source. This cooking method allows the outer layer of the meat to become crispy and caramelized, while the inner layers remain tender and juicy."),
+                      text: dataClass.mainlist[index]["description"]!),
                 ),
               ],
             ),
@@ -92,7 +92,7 @@ class SecondaryDetailsPage extends StatelessWidget {
                 IconColor: Colors.white,
               ),
               LargeText(
-                text: "1 " + " X " + " 10 \$",
+                text: "1 " + " X " + "Rs."+dataClass.mainlist[index]["price"]!,
                 size: Dimensions.height25,
               ),
               ActionIconButton(
@@ -141,7 +141,10 @@ class SecondaryDetailsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(Dimensions.height20),
                   color: Colors.white,
                 ),
-                child: Icon(Icons.favorite,color: Colors.pink,),
+                child: Icon(
+                  Icons.favorite,
+                  color: Colors.pink,
+                ),
               ),
               Container(
                 padding: EdgeInsets.only(
@@ -154,7 +157,7 @@ class SecondaryDetailsPage extends StatelessWidget {
                   color: Colors.blue,
                 ),
                 child: LargeText(
-                  text: "10\$ | Add to cart",
+                  text: "Rs."+dataClass.mainlist[index]['price']! +" | Add to cart",
                   color: Colors.white,
                 ),
               )

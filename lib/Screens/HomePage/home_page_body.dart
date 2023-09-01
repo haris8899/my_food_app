@@ -1,12 +1,14 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:my_food_app/Screens/ProductPage/main_details_page.dart';
 import 'package:my_food_app/Screens/ProductPage/secondary_details_page.dart';
+import 'package:my_food_app/data/data.dart';
 import 'package:my_food_app/utils/dimensions.dart';
 import 'package:my_food_app/widgets/Text_Icon.dart';
 import 'package:my_food_app/widgets/details_column.dart';
 import 'package:my_food_app/widgets/large_text.dart';
 import 'package:my_food_app/widgets/small_text.dart';
+
+import '../ProductPage/main_details_page.dart';
 
 class HomePageBody extends StatefulWidget {
   const HomePageBody({super.key});
@@ -41,16 +43,25 @@ class _HomePageBodyState extends State<HomePageBody> {
     return Column(
       children: [
         Container(
+          margin: EdgeInsets.only(left: Dimensions.width30),
+          child: Row(children: [
+            LargeText(text: "Featured"),
+          ]),
+        ),
+        SizedBox(
+          height: Dimensions.height30,
+        ),
+        Container(
           height: Dimensions.pageViewMainContainer,
           child: PageView.builder(
               controller: pageController,
-              itemCount: 5,
+              itemCount: dataClass.Featured.length,
               itemBuilder: (context, position) {
                 return _buildPageItem(position);
               }),
         ),
         DotsIndicator(
-          dotsCount: 5,
+          dotsCount: dataClass.Featured.length,
           position: _currentPageValue,
           decorator: DotsDecorator(
             activeColor: Colors.blue,
@@ -72,15 +83,16 @@ class _HomePageBodyState extends State<HomePageBody> {
         ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: 10,
+            itemCount: dataClass.mainlist.length,
             itemBuilder: (context, index) => InkWell(
-              onTap: ()=>{
-                 Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SecondaryDetailsPage()),
-                  ),
-              },
-              child: Container(
+                  onTap: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SecondaryDetailsPage(index: index)),
+                    ),
+                  },
+                  child: Container(
                     margin: EdgeInsets.only(
                         left: Dimensions.width20,
                         right: Dimensions.width20,
@@ -90,13 +102,13 @@ class _HomePageBodyState extends State<HomePageBody> {
                         width: Dimensions.height120,
                         height: Dimensions.height120,
                         decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(Dimensions.BorderRadius15),
+                            borderRadius: BorderRadius.circular(
+                                Dimensions.BorderRadius15),
                             color: Colors.lightBlue,
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: AssetImage(
-                                  "assets/images/food1.png",
+                                  dataClass.mainlist[index]["image"]!,
                                 ))),
                       ),
                       Expanded(
@@ -128,11 +140,41 @@ class _HomePageBodyState extends State<HomePageBody> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                LargeText(text: "Food"),
+                                LargeText(
+                                    text: dataClass.mainlist[index]['name']!),
                                 SizedBox(
                                   height: Dimensions.width10,
                                 ),
-                                SmallText(text: "Very good dish"),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Wrap(
+                                          children: List.generate(
+                                            5,
+                                            (index) => Icon(
+                                              Icons.star,
+                                              color: Colors.blue,
+                                              size: 15,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        SmallText(text: "4.5"),
+                                      ],
+                                    ),
+                                    SmallText(
+                                      text: "Rs." +
+                                          dataClass.mainlist[index]["price"]!,
+                                      color: Colors.black,
+                                    ),
+                                  ],
+                                ),
                                 SizedBox(
                                   height: Dimensions.width10,
                                 ),
@@ -162,7 +204,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                       ),
                     ]),
                   ),
-            )),
+                )),
       ],
     );
   }
@@ -195,9 +237,12 @@ class _HomePageBodyState extends State<HomePageBody> {
     return Transform(
       transform: matrix,
       child: InkWell(
-        onTap: ()=>{
-                    Navigator.push(context,MaterialPageRoute(builder: (context) => const MainDetailsPage())),
-                  },
+        onTap: () => {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MainDetailsPage(index: index))),
+        },
         child: Stack(
           children: [
             Container(
@@ -206,11 +251,13 @@ class _HomePageBodyState extends State<HomePageBody> {
                 margin: EdgeInsets.only(
                     left: Dimensions.width10, right: Dimensions.width10),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.BorderRadius30),
+                  borderRadius:
+                      BorderRadius.circular(Dimensions.BorderRadius30),
                   color: index.isEven ? Colors.blue : Colors.amber,
+                  border: Border.all(color: Colors.grey),
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("assets/images/food1.png")),
+                      image: AssetImage(dataClass.Featured[index]['image']!)),
                 )),
             Align(
               alignment: Alignment.bottomCenter,
@@ -221,7 +268,8 @@ class _HomePageBodyState extends State<HomePageBody> {
                     right: Dimensions.width20,
                     bottom: Dimensions.height20),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.BorderRadius30),
+                  borderRadius:
+                      BorderRadius.circular(Dimensions.BorderRadius30),
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
@@ -235,7 +283,8 @@ class _HomePageBodyState extends State<HomePageBody> {
                 child: Container(
                   padding: EdgeInsets.only(
                       top: Dimensions.height15, left: 15, right: 15),
-                      child: DetailsColumn(text: "Food"),
+                  child:
+                      DetailsColumn(text: dataClass.Featured[index]["name"]!),
                 ),
               ),
             )

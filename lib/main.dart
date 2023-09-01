@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_food_app/AppFrame/app_navigation_frame.dart';
-import 'package:my_food_app/controllers/main_product_controller.dart';
+import 'package:my_food_app/Screens/AppFrame/app_navigation_frame.dart';
 
 import 'Screens/HomePage/main_home_page.dart';
-import 'helper/dependencies.dart' as dep;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //dep.init();
   runApp(const MyApp());
 }
 
