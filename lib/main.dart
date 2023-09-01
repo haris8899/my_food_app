@@ -6,6 +6,7 @@ import 'Screens/HomePage/main_home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Future.delayed(const Duration(milliseconds: 300));
   runApp(const MyApp());
 }
 
