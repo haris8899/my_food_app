@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_food_app/Screens/Orders/shopping_cart.dart';
 import 'package:my_food_app/data/data.dart';
 import 'package:my_food_app/utils/dimensions.dart';
 import 'package:my_food_app/widgets/Text_Icon.dart';
@@ -44,8 +45,17 @@ class MainDetailsPage extends StatelessWidget {
                   onTap: () => Navigator.pop(context),
                   child: ActionIconButton(icon: Icons.arrow_back_ios),
                 ),
-                ActionIconButton(
-                  icon: Icons.shopping_cart_outlined,
+                InkWell(
+                  onTap: () => {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ShoppingCart()),
+                                  ),
+                                },
+                  child: ActionIconButton(
+                    icon: Icons.shopping_cart_outlined,
+                  ),
                 )
               ],
             ),
