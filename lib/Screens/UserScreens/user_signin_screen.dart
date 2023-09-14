@@ -1,14 +1,59 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_food_app/Screens/UserScreens/user_signup_screen.dart';
 import 'package:my_food_app/utils/dimensions.dart';
+import 'package:my_food_app/widgets/my_button.dart';
 import 'package:my_food_app/widgets/password_field.dart';
 
 import '../../widgets/email_field.dart';
 
-class UserSignInWidget extends StatelessWidget {
+class UserSignInWidget extends StatefulWidget {
   const UserSignInWidget({super.key});
 
+  @override
+  State<UserSignInWidget> createState() => _UserSignInWidgetState();
+}
+
+class _UserSignInWidgetState extends State<UserSignInWidget> {
+
+  final UsernameController = TextEditingController();
+
+  final PasswordController = TextEditingController();
+
+  void ShowErrorMessage(String text) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(text),
+      ),
+    );
+  }
+
+  void SignUserIn() async {
+    showDialog(
+        context: context,
+        builder: (context) => Center(
+              child: CircularProgressIndicator(),
+            ));
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: UsernameController.text,
+        password: PasswordController.text,
+      );
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      if (e.code == "invalid-email") {
+        ShowErrorMessage("Email is Invalid");
+      } else if (e.code == 'user-not-found') {
+        ShowErrorMessage("No User exists with these credentials");
+      } else if (e.code == 'wrong-password') {
+        ShowErrorMessage("Password Incorrect");
+      }
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,25 +101,21 @@ class UserSignInWidget extends StatelessWidget {
                           ),
                           child: Column(
                             children: <Widget>[
-                              EmailField(text: "Email"),
-                              PasswordField(text: "Password"),
+                              EmailField(
+                                text: "Email",
+                                Controller: UsernameController,
+                              ),
+                              PasswordField(
+                                text: "Password",
+                                Controller: PasswordController,
+                              ),
                             ],
                           ),
                         ),
                         SizedBox(height: Dimensions.height30,),
                         Text("Forgot Password?", style: TextStyle(color: Colors.grey),),
                         SizedBox(height: Dimensions.height30,),
-                        Container(
-                          height: 50,
-                          margin: EdgeInsets.symmetric(horizontal: Dimensions.width45),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(Dimensions.BorderRadius30),
-                            color: Colors.orange[900]
-                          ),
-                          child: Center(
-                            child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                          ),
-                        ),
+                        MyButton(text: "Login",onTap: SignUserIn,),
                         SizedBox(height: Dimensions.height45,),
                         Text("Continue with social media", style: TextStyle(color: Colors.grey),),
                         SizedBox(height: Dimensions.height30,),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_food_app/Screens/ProductPage/secondary_details_page.dart';
 import 'package:my_food_app/data/data.dart';
 import 'package:my_food_app/utils/dimensions.dart';
+import 'package:my_food_app/widgets/item_counter.dart';
 import 'package:my_food_app/widgets/large_text.dart';
 import 'package:my_food_app/widgets/small_text.dart';
 

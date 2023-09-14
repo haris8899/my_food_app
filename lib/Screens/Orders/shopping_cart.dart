@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_food_app/utils/dimensions.dart';
 import 'package:my_food_app/widgets/action_icon_button.dart';
+import 'package:my_food_app/widgets/item_counter.dart';
 import 'package:my_food_app/widgets/large_text.dart';
 import 'package:my_food_app/widgets/cart_list.dart';
 
@@ -35,6 +36,42 @@ class _ShoppingCartState extends State<ShoppingCart> {
              ),
               SizedBox(height: Dimensions.height20,),
               CartList(),
+              
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        height: Dimensions.pageViewTextContainer,
+        padding: EdgeInsets.only(
+            left: Dimensions.width20,
+            right: Dimensions.width20,
+            top: Dimensions.height30,
+            bottom: Dimensions.height30),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(Dimensions.height20 * 2),
+              topRight: Radius.circular(Dimensions.height20 * 2)),
+          color: Colors.grey[100],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            LargeText(text: "Total Price"),
+            Container(
+              padding: EdgeInsets.only(
+                  left: Dimensions.width20,
+                  right: Dimensions.width20,
+                  top: Dimensions.height20,
+                  bottom: Dimensions.height20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.height20),
+                color: Colors.blue,
+              ),
+              child: LargeText(
+                text: "Checkout",
+                color: Colors.white,
+              ),
+            )
           ],
         ),
       ),

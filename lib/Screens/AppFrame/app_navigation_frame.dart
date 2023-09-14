@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:my_food_app/Screens/HomePage/main_home_page.dart';
 import 'package:my_food_app/Screens/ProductPage/menu_page.dart';
+import 'package:my_food_app/Screens/UserScreens/user_frame.dart';
 import 'package:my_food_app/Screens/UserScreens/user_signin_screen.dart';
 import 'package:my_food_app/utils/dimensions.dart';
 
@@ -18,7 +19,7 @@ class _NavigationFrameState extends State<NavigationFrame> {
   final MainScreens = [
     MainHomePage(),
     MenuPage(),
-    UserSignInWidget(),
+    UserFrame(),
   ];
   @override
   Widget build(BuildContext context) {
