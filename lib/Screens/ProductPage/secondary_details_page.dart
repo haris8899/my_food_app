@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_food_app/Screens/Orders/cart_functions.dart';
 import 'package:my_food_app/Screens/Orders/shopping_cart.dart';
 import 'package:my_food_app/data/data.dart';
 import 'package:my_food_app/utils/dimensions.dart';
@@ -9,12 +10,34 @@ import 'package:my_food_app/widgets/item_counter.dart';
 import 'package:my_food_app/widgets/large_text.dart';
 import 'package:my_food_app/widgets/small_text.dart';
 
-class SecondaryDetailsPage extends StatelessWidget {
+class SecondaryDetailsPage extends StatefulWidget {
   final int index;
   const SecondaryDetailsPage({super.key, required this.index});
 
   @override
+  State<SecondaryDetailsPage> createState() => _SecondaryDetailsPageState();
+}
+
+class _SecondaryDetailsPageState extends State<SecondaryDetailsPage> {
+  int Quantity = 1;
+  void addquantity() {
+    setState(() {
+      Quantity += 1;
+    });
+  }
+
+  void decreasequantity() {
+    setState(() {
+      if (Quantity > 1) {
+        Quantity -= 1;
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    int currprice =
+        Quantity * int.parse(dataClass.mainlist[widget.index]['price']!);
     return Scaffold(
       backgroundColor: Colors.grey[50],
       body: CustomScrollView(
@@ -29,15 +52,14 @@ class SecondaryDetailsPage extends StatelessWidget {
                     onTap: () => Navigator.pop(context),
                     child: ActionIconButton(icon: Icons.close)),
                 InkWell(
-                  onTap: () => {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ShoppingCart()),
-                                  ),
-                                },
-                  child: ActionIconButton(icon: Icons.shopping_cart)
-                ),
+                    onTap: () => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ShoppingCart()),
+                          ),
+                        },
+                    child: ActionIconButton(icon: Icons.shopping_cart)),
               ],
             ),
             bottom: PreferredSize(
@@ -58,7 +80,7 @@ class SecondaryDetailsPage extends StatelessWidget {
                         topRight: Radius.circular(Dimensions.BorderRadius15),
                       )),
                   child: LargeText(
-                    text: dataClass.mainlist[index]["name"]!,
+                    text: dataClass.mainlist[widget.index]["name"]!,
                     size: Dimensions.height25,
                   )),
             ),
@@ -67,7 +89,7 @@ class SecondaryDetailsPage extends StatelessWidget {
             expandedHeight: Dimensions.height300,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
-                dataClass.mainlist[index]["image"]!,
+                dataClass.mainlist[widget.index]["image"]!,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -81,7 +103,7 @@ class SecondaryDetailsPage extends StatelessWidget {
                       left: Dimensions.width20, right: Dimensions.width20),
                   decoration: BoxDecoration(),
                   child: ExpandableText(
-                      text: dataClass.mainlist[index]["description"]!),
+                      text: dataClass.mainlist[widget.index]["description"]!),
                 ),
               ],
             ),
@@ -95,21 +117,30 @@ class SecondaryDetailsPage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ActionIconButton(
-                iconSize: Dimensions.icon24,
-                icon: Icons.remove,
-                backgroundColor: Colors.blue,
-                IconColor: Colors.white,
+              InkWell(
+                onTap: decreasequantity,
+                child: ActionIconButton(
+                  iconSize: Dimensions.icon24,
+                  icon: Icons.remove,
+                  backgroundColor: Colors.blue,
+                  IconColor: Colors.white,
+                ),
               ),
               LargeText(
-                text: "1 " + " X " + "Rs."+dataClass.mainlist[index]["price"]!,
+                text: Quantity.toString() +
+                    " X " +
+                    "Rs." +
+                    dataClass.mainlist[widget.index]["price"]!,
                 size: Dimensions.height25,
               ),
-              ActionIconButton(
-                iconSize: Dimensions.icon24,
-                icon: Icons.add,
-                backgroundColor: Colors.blue,
-                IconColor: Colors.white,
+              InkWell(
+                onTap: addquantity,
+                child: ActionIconButton(
+                  iconSize: Dimensions.icon24,
+                  icon: Icons.add,
+                  backgroundColor: Colors.blue,
+                  IconColor: Colors.white,
+                ),
               ),
             ],
           ),
@@ -156,19 +187,25 @@ class SecondaryDetailsPage extends StatelessWidget {
                   color: Colors.pink,
                 ),
               ),
-              Container(
-                padding: EdgeInsets.only(
-                    left: Dimensions.width20,
-                    right: Dimensions.width20,
-                    top: Dimensions.height20,
-                    bottom: Dimensions.height20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.height20),
-                  color: Colors.blue,
-                ),
-                child: LargeText(
-                  text: "Rs."+dataClass.mainlist[index]['price']! +" | Add to cart",
-                  color: Colors.white,
+              InkWell(
+                onTap: () {
+                  CartFunctions.addToCart(widget.index.toString(), Quantity);
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  padding: EdgeInsets.only(
+                      left: Dimensions.width20,
+                      right: Dimensions.width20,
+                      top: Dimensions.height20,
+                      bottom: Dimensions.height20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.height20),
+                    color: Colors.blue,
+                  ),
+                  child: LargeText(
+                    text: "Rs." + currprice.toString() + " | Add to cart",
+                    color: Colors.white,
+                  ),
                 ),
               )
             ],

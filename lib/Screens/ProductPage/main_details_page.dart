@@ -10,12 +10,32 @@ import 'package:my_food_app/widgets/item_counter.dart';
 import 'package:my_food_app/widgets/large_text.dart';
 import 'package:my_food_app/widgets/small_text.dart';
 
-class MainDetailsPage extends StatelessWidget {
+class MainDetailsPage extends StatefulWidget {
   final int index;
   const MainDetailsPage({super.key, required this.index});
 
   @override
+  State<MainDetailsPage> createState() => _MainDetailsPageState();
+}
+
+class _MainDetailsPageState extends State<MainDetailsPage> {
+  int Quantity = 1;
+  void addquantity() {
+    setState(() {
+      Quantity += 1;
+    });
+  }
+
+  void decreasequantity() {
+    setState(() {
+      if (Quantity > 1) {
+        Quantity -= 1;
+      }
+    });
+  }
+  @override
   Widget build(BuildContext context) {
+    int currprice = Quantity*int.parse(dataClass.mainlist[widget.index]['price']!);
     return Scaffold(
       body: Stack(
         children: [
@@ -29,7 +49,7 @@ class MainDetailsPage extends StatelessWidget {
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     image: AssetImage(
-                      dataClass.Featured[index]["image"]!,
+                      dataClass.Featured[widget.index]["image"]!,
                     )),
               ),
             ),
@@ -79,7 +99,7 @@ class MainDetailsPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  DetailsColumn(text: dataClass.Featured[index]["name"]!),
+                  DetailsColumn(text: dataClass.Featured[widget.index]["name"]!),
                   SizedBox(
                     height: Dimensions.height20,
                   ),
@@ -87,7 +107,7 @@ class MainDetailsPage extends StatelessWidget {
                   Expanded(
                       child: SingleChildScrollView(
                           child: ExpandableText(
-                              text:dataClass.Featured[index]['description']!)))
+                              text:dataClass.Featured[widget.index]['description']!)))
                 ],
               ),
             ),
@@ -110,7 +130,7 @@ class MainDetailsPage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ItermCounterWidget(),
+            ItermCounterWidget(count:Quantity,Add: addquantity,Remove: decreasequantity,),
             Container(
               padding: EdgeInsets.only(
                   left: Dimensions.width20,
@@ -122,7 +142,7 @@ class MainDetailsPage extends StatelessWidget {
                 color: Colors.blue,
               ),
               child: LargeText(
-                text: "Rs. "+dataClass.Featured[index]["price"]!+" | Add to cart",
+                text: "Rs. "+currprice.toString()+" | Add to cart",
                 color: Colors.white,
               ),
             )
