@@ -23,13 +23,4 @@ class CartFunctions {
   static Future<void> removeFromCart(String id) async {
     await FirebaseFirestore.instance.collection("ShoppingCart").doc(id).delete();
   }
-  
-  Future<void> getCartFirebase() async {
-    await FirebaseFirestore.instance
-        .collection("ShoppingCart")
-        .get()
-        .then((snapshot) => snapshot.docs.forEach((element) {
-              cart.add(element.data());
-            }));
-  }
 }

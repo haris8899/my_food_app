@@ -90,7 +90,8 @@ class _HomePageBodyState extends State<HomePageBody> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SecondaryDetailsPage(index: index)),
+                          builder: (context) =>
+                              SecondaryDetailsPage(index: index)),
                     ),
                   },
                   child: Container(
@@ -142,19 +143,29 @@ class _HomePageBodyState extends State<HomePageBody> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     LargeText(
-                                        text: dataClass.mainlist[index]['name']!),
+                                        text: dataClass.mainlist[index]
+                                            ['name']!),
                                     InkWell(
-                                      onTap: () => CartFunctions.addToCart(index.toString(), 1),
+                                      onTap: () => {
+                                        CartFunctions.addToCart(
+                                            index.toString(), 1),
+                                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Added to Cart"),))
+                                      },
                                       child: Container(
-                                        padding: EdgeInsets.all(Dimensions.height10/2),
+                                        padding: EdgeInsets.all(
+                                            Dimensions.height10 / 2),
                                         decoration: BoxDecoration(
-                                          color: Colors.blue,
-                                          borderRadius: BorderRadius.circular(Dimensions.height30)
+                                            color: Colors.blue,
+                                            borderRadius: BorderRadius.circular(
+                                                Dimensions.height30)),
+                                        child: Icon(
+                                          Icons.add,
+                                          color: Colors.white,
                                         ),
-                                        child: Icon(Icons.add,color: Colors.white,),
                                       ),
                                     )
                                   ],
@@ -167,7 +178,8 @@ class _HomePageBodyState extends State<HomePageBody> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Wrap(
                                           children: List.generate(
