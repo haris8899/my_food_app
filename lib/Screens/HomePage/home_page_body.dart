@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:my_food_app/Screens/Orders/cart_functions.dart';
 import 'package:my_food_app/Screens/ProductPage/secondary_details_page.dart';
 import 'package:my_food_app/data/data.dart';
 import 'package:my_food_app/utils/dimensions.dart';
@@ -145,13 +146,16 @@ class _HomePageBodyState extends State<HomePageBody> {
                                   children: [
                                     LargeText(
                                         text: dataClass.mainlist[index]['name']!),
-                                    Container(
-                                      padding: EdgeInsets.all(Dimensions.height10/2),
-                                      decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius: BorderRadius.circular(Dimensions.height30)
+                                    InkWell(
+                                      onTap: () => CartFunctions.addToCart(index.toString(), 1),
+                                      child: Container(
+                                        padding: EdgeInsets.all(Dimensions.height10/2),
+                                        decoration: BoxDecoration(
+                                          color: Colors.blue,
+                                          borderRadius: BorderRadius.circular(Dimensions.height30)
+                                        ),
+                                        child: Icon(Icons.add,color: Colors.white,),
                                       ),
-                                      child: Icon(Icons.add,color: Colors.white,),
                                     )
                                   ],
                                 ),

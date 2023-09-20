@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:my_food_app/Screens/Orders/cart_functions.dart';
 import 'package:my_food_app/Screens/ProductPage/secondary_details_page.dart';
 import 'package:my_food_app/data/data.dart';
 import 'package:my_food_app/utils/dimensions.dart';
@@ -65,7 +66,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   var data = snapshot.data?.docs;
                   totalPrice = 0;
                   data?.forEach((element) {
-                    int id = int.parse(element.data()["id"]);
+                    int id = int.parse(element.id);
                     int count = element.data()["count"];
                     int price = int.parse(dataClass.mainlist[id]["price"]!);
                     totalPrice += (count * price);
@@ -107,8 +108,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   fit: BoxFit.cover,
                                                   image: AssetImage(
                                                     dataClass.mainlist[
-                                                        int.parse(data?[index]
-                                                            ["id"])]["image"]!,
+                                                        int.parse(data![index].id)]["image"]!,
                                                   ))),
                                         ),
                                         Expanded(
@@ -143,12 +143,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  LargeText(
-                                                      text: dataClass.mainlist[
-                                                              int.parse(
-                                                                  data?[index]
-                                                                      ["id"])]
-                                                          ['name']!),
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      LargeText(
+                                                          text: dataClass.mainlist[
+                                                                  int.parse(
+                                                                      data![index].id)]
+                                                              ['name']!),
+                                                      InkWell(
+                                                        onTap: () => CartFunctions.removeFromCart(data![index].id),
+                                                        child: Container(
+                                                          padding: EdgeInsets.all(Dimensions.height10/2),
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(Dimensions.height10),
+                                                            color: Colors.blue,
+                                                          ),
+                                                          child: Icon(Icons.delete,color: Colors.white,),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
                                                   SizedBox(
                                                     height: Dimensions.width10,
                                                   ),
@@ -157,13 +172,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      itemCountSmall(count: data![index]["count"]),
+                                                      itemCountSmall(
+                                                          count: data![index]
+                                                              ["count"]),
                                                       SmallText(
                                                         text: "Rs." +
                                                             dataClass.mainlist[int
-                                                                    .parse(data?[
-                                                                            index]
-                                                                        ["id"])]
+                                                                    .parse(data![index].id)]
                                                                 ["price"]!,
                                                         color: Colors.black,
                                                       ),
