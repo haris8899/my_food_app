@@ -140,8 +140,21 @@ class _HomePageBodyState extends State<HomePageBody> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                LargeText(
-                                    text: dataClass.mainlist[index]['name']!),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    LargeText(
+                                        text: dataClass.mainlist[index]['name']!),
+                                    Container(
+                                      padding: EdgeInsets.all(Dimensions.height10/2),
+                                      decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(Dimensions.height30)
+                                      ),
+                                      child: Icon(Icons.add,color: Colors.white,),
+                                    )
+                                  ],
+                                ),
                                 SizedBox(
                                   height: Dimensions.width10,
                                 ),

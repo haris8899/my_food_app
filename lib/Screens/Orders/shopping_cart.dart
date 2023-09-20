@@ -4,6 +4,7 @@ import 'package:my_food_app/Screens/ProductPage/secondary_details_page.dart';
 import 'package:my_food_app/data/data.dart';
 import 'package:my_food_app/utils/dimensions.dart';
 import 'package:my_food_app/widgets/action_icon_button.dart';
+import 'package:my_food_app/widgets/item_count_small.dart';
 import 'package:my_food_app/widgets/item_counter.dart';
 import 'package:my_food_app/widgets/large_text.dart';
 import 'package:my_food_app/widgets/cart_list.dart';
@@ -68,7 +69,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     int count = element.data()["count"];
                     int price = int.parse(dataClass.mainlist[id]["price"]!);
                     totalPrice += (count * price);
-                    print(totalPrice);
                   });
                   return Column(
                     children: [
@@ -121,7 +121,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 BoxShadow(
                                                   color: Colors.grey
                                                       .withOpacity(0.3),
-                                                  spreadRadius: 8,
+                                                  spreadRadius: 3,
                                                   blurRadius: 10,
                                                   offset: Offset(0, 3),
                                                 ),
@@ -157,10 +157,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      SmallText(
-                                                          text: data![index]
-                                                                  ["count"]
-                                                              .toString()),
+                                                      itemCountSmall(count: data![index]["count"]),
                                                       SmallText(
                                                         text: "Rs." +
                                                             dataClass.mainlist[int
@@ -175,25 +172,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   SizedBox(
                                                     height: Dimensions.width10,
                                                   ),
-                                                  // Row(
-                                                  //   mainAxisAlignment:
-                                                  //       MainAxisAlignment.spaceBetween,
-                                                  //   children: [
-                                                  //     TextIcon(
-                                                  //       icon: Icons.circle_sharp,
-                                                  //       text: 'Normal',
-                                                  //       iconColor: Colors.amber,
-                                                  //     ),
-                                                  //     TextIcon(
-                                                  //         icon: Icons.location_on,
-                                                  //         text: "1.7 Km",
-                                                  //         iconColor: Colors.red),
-                                                  //     TextIcon(
-                                                  //         icon: Icons.access_time_outlined,
-                                                  //         text: "20 min",
-                                                  //         iconColor: Colors.red),
-                                                  //   ],
-                                                  // ),
                                                 ],
                                               ),
                                             ),
